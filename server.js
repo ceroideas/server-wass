@@ -17,6 +17,8 @@ const app = express();
 * @ Routes
 */
 const testRoutes = require('./routes/test');
+const registerRoutes = require('./routes/app_mobil/register');
+const loginRoutes = require('./routes/app_mobil/login');
 
 /***/
 
@@ -31,5 +33,7 @@ app.use(bodyParser.urlencoded({exrended: true}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(testRoutes);
+app.use(registerRoutes);
+app.use(loginRoutes);
 
 app.listen(process.env.PORT || 3000);
