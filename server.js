@@ -2,6 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
+
+/*
+* @ Config BBDD
+*/
+require('./config/db');
+
+/***/
+
+
 const app = express();
 
 /*
