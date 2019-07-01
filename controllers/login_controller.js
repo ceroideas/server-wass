@@ -17,5 +17,9 @@ module.exports = {
             
             res.status(201).json({success: false});
         });
+    },
+
+    locationPush: function(req, res){
+        console.log(req);
     }
 }
