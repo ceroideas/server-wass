@@ -20,6 +20,48 @@ module.exports = {
     },
 
     locationPush: function(req, res){
-        console.log(req);
+
+        var sendNotification = function(data) {
+            var headers = {
+              "Content-Type": "application/json; charset=utf-8"
+            };
+            
+            var options = {
+              host: "onesignal.com",
+              port: 443,
+              path: "/api/v1/notifications",
+              method: "POST",
+              headers: headers
+            };
+            
+            var https = require('https');
+            var req = https.request(options, function(res) {  
+              res.on('data', function(data) {
+                console.log("Response:");
+                console.log(JSON.parse(data));
+              });
+            });
+            
+            req.on('error', function(e) {
+              console.log("ERROR:");
+              console.log(e);
+            });
+            
+            req.write(JSON.stringify(data));
+            req.end();
+          };
+          
+          var playerID = req.body.playerID;
+          var message = { 
+            app_id: "70ca3981-3ce0-47df-bb3d-70cf8a689048",
+            contents: {"en": "You are near an area in which you must be careful."},
+            headings: {"en": "Warning"},
+            subtitle: {"en": "Take precaution"},
+            include_player_ids: [playerID]
+          };
+          
+          sendNotification(message);
+          
+        console.log(req.body);
     }
 }
