@@ -24,7 +24,7 @@ module.exports = {
         var sendNotification = function(data) {
             var headers = {
               "Content-Type": "application/json; charset=utf-8",
-              "Authorization": "MTMyODk4MWMtOWY3OC00NGMyLWI2MDItNjQ1OWU0ZTEyNWEx",
+              "Authorization": "MTMyODk4MWMtOWY3OC00NGMyLWI2MDItNjQ1OWU0ZTEyNWEx"
             };
             
             var options = {
