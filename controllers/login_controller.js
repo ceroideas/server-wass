@@ -52,17 +52,16 @@ module.exports = {
             req.end();
           };
           
-          var playerID = req.body.playerID;
           var message = { 
             app_id: "70ca3981-3ce0-47df-bb3d-70cf8a689048",
             contents: {"en": "You are near an area in which you must be careful."},
             headings: {"en": "Warning"},
             subtitle: {"en": "Take precaution"},
-            include_player_ids: [playerID]
+            include_player_ids: ["59e12242-88ef-4deb-b302-7dd7e5488011"]
           };
           
           sendNotification(message);
           
-        console.log(req.body);
+        // console.log(req.body);
     }
 }
