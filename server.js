@@ -23,7 +23,7 @@ const loginRoutes = require('./routes/app_mobil/login');
 /*
 * @ Routes web
 */
-const usersRouters = require('./routes/app_web/users');
+const webRouters = require('./routes/app_web/index');
 
 /***/
 
@@ -42,6 +42,6 @@ app.use(testRoutes);
 app.use(registerRoutes);
 app.use(loginRoutes);
 
-app.use(usersRouters);
+app.use(webRouters);
 
 app.listen(process.env.PORT || 3000);
