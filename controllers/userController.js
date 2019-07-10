@@ -2,15 +2,30 @@ const User = require('../models/User');
 
 module.exports = {
 
-    index: function(req, res){
+    create: (req, res) => {
+        res.status(201).json({success: true, message: 'user create'});
+    },
 
-        User.find().exec(function(error, users) {
-            if (error) res.status(500).send(error);
+    findAll: function(req, res){
 
-            if(users.length){
-                res.status(201).json({success: true, users});
-            }
-            res.status(201).json({success: false});
+        const getUsers = User.find().exec();
+        
+        getUsers.then((users) => {
+            res.status(201).json({success: true, users});
+        }).catch((error) => {
+            res.status(500).send({success: false, error});
         });
+    },
+
+    update: (req, res) => {
+        res.status(201).json({success: true, message: 'user update'});
+    },
+
+    findOne: (req, res) => {
+        res.status(201).json({success: true, message: 'user findOne'});
+    },
+
+    delete: (req, res) => {
+        res.status(201).json({success: true, message: 'user delete'});
     }
 }
