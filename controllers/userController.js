@@ -3,7 +3,16 @@ const User = require('../models/User');
 module.exports = {
 
     create: (req, res) => {
-        res.status(201).json({success: true, message: 'user create'});
+        let newUser = new User(req.body);
+
+        newUser.save((error, user) => {
+
+            if(error){
+                res.status(500).send({success: false, error});
+            } else {
+                res.status(201).json({success: true});
+            }
+        });
     },
 
     findAll: function(req, res){
