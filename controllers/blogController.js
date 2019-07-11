@@ -7,7 +7,7 @@ module.exports = {
     },
 
     findAll: (req, res) => {
-        const getBlogs = Blog.find().exec();
+        const getBlogs = Blog.find().sort({_id: -1}).exec();
         
         getBlogs.then((blogs) => {
             res.status(201).json({success: true, blogs});

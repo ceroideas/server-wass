@@ -7,7 +7,7 @@ module.exports = {
     },
 
     findAll: (req, res) => {
-        const getAreas = Area.find().exec();
+        const getAreas = Area.find().sort({_id: -1}).exec();
         
         getAreas.then((areas) => {
             res.status(201).json({success: true, areas});

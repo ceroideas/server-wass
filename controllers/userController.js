@@ -7,8 +7,7 @@ module.exports = {
     },
 
     findAll: function(req, res){
-
-        const getUsers = User.find().exec();
+        const getUsers = User.find().sort({_id: -1}).exec();
         
         getUsers.then((users) => {
             res.status(201).json({success: true, users});

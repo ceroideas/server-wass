@@ -7,7 +7,7 @@ module.exports = {
     },
 
     findAll: (req, res) => {
-        const getComments = Comment.find().exec();
+        const getComments = Comment.find().sort({_id: -1}).exec();
         
         getComments.then((comments) => {
             res.status(201).json({success: true, comments});
