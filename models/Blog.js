@@ -15,6 +15,10 @@ const BlogSchema = new Schema({
         type: String,
         default: ''
     },
+    author: {
+        type: String,
+        default: ''
+    },
     images: {
         type: [Schema.Types.Mixed]
     },
