@@ -3,7 +3,20 @@ const Comment = require('../models/Comment');
 module.exports = {
 
     create: (req, res) => {
-        res.status(201).json({success: true, message: 'comment create'});
+        let newComment = new Comment({
+            comment: req.body.comment,
+            location: {latitude: req.body.latitude, longitude: req.body.longitude},
+            status: req.body.status
+        });
+
+        newComment.save((error, comment) => {
+
+            if(error){
+                res.status(500).send({success: false, error});
+            } else {
+                res.status(201).json({success: true});
+            }
+        });
     },
 
     findAll: (req, res) => {
@@ -25,6 +38,11 @@ module.exports = {
     },
 
     delete: (req, res) => {
-        res.status(201).json({success: true, message: 'comment delete'});
+        Comment.findByIdAndRemove(req.params.commentId, function (err, comment) {
+            if (err){
+                res.json({ success: false});
+            }
+            res.json({ success: true});
+        });
     },
 }
