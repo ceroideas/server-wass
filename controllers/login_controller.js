@@ -11,7 +11,13 @@ module.exports = {
             if (error) res.status(500).send(error);
 
             if(user.length){
-                res.status(201).json({success: true, user});
+                res.status(201).json({success: true, user: {
+                  firstName: user.firstName,
+                  name: user.name,
+                  email: user.email,
+                  nationality: user.nationality,
+                  createdOn: user.createdOn
+                }});
             }
 
             
