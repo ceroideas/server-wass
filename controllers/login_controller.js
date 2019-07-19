@@ -12,11 +12,11 @@ module.exports = {
 
             if(user.length){
                 res.status(201).json({success: true, user: {
-                  firstName: user.firstName,
-                  name: user.name,
-                  email: user.email,
-                  nationality: user.nationality,
-                  createdOn: user.createdOn
+                  firstName: user[0].firstName,
+                  name: user[0].name,
+                  email: user[0].email,
+                  nationality: user[0].nationality,
+                  createdOn: user[0].createdOn
                 }});
             }
 
