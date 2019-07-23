@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-
+const socketio = require('socket.io');
+const http = require('http');
 /*
 * @ Config BBDD
 */
@@ -12,6 +13,9 @@ require('./config/db');
 
 
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+const PORT = process.env.PORT || 3000;
 
 /*
 * @ Routes
@@ -19,6 +23,7 @@ const app = express();
 const testRoutes = require('./routes/test');
 const registerRoutes = require('./routes/app_mobil/register');
 const loginRoutes = require('./routes/app_mobil/login');
+const chatRoutes = require('./routes/app_mobil/chat');
 
 /*
 * @ Routes web
@@ -42,7 +47,46 @@ app.use(methodOverride('_method'));
 app.use(testRoutes);
 app.use(registerRoutes);
 app.use(loginRoutes);
+app.use(chatRoutes);
 
 app.use(webRouters);
 
-app.listen(process.env.PORT || 3000);
+
+io.on('connection', (socket) => {
+	// console.log('Hola socket');
+	// socket.on('disconnect', () => {
+	// });	
+
+	// socket.on('home', (socket) => {
+	// 	console.log('Hola mundo');
+	// 	console.log(socket);
+	// });
+
+	socket.on('message', function(msg){
+	console.log(msg);
+	// socket.emit('message', msg);
+	
+	});
+	
+	socket.on('add-message', (message) => {
+	
+	io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});
+	
+	});
+	
+	socket.on('disconnect', function(){
+	
+	io.emit('users-changed', {user: socket.nickname, event: 'left'});
+	
+	console.log('User Disconnected');
+	
+	});
+});
+
+server.listen(PORT, () => {
+	console.log('Servidor conectado ' + PORT);
+});
+
+
+
+const client = require('./realtime/client');
