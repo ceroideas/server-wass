@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
 const socketio = require('socket.io');
-const http = require('http');
 /*
 * @ Config BBDD
 */
@@ -13,8 +12,6 @@ require('./config/db');
 
 
 const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
 const PORT = process.env.PORT || 3000;
 
 /*
@@ -31,6 +28,8 @@ const chatRoutes = require('./routes/app_mobil/chat');
 const webRouters = require('./routes/app_web/index');
 
 /***/
+const chatUtils = require('./realtime/chat/index');
+
 
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -51,42 +50,45 @@ app.use(chatRoutes);
 
 app.use(webRouters);
 
-
-io.on('connection', (socket) => {
-	// console.log('Hola socket');
-	// socket.on('disconnect', () => {
-	// });	
-
-	// socket.on('home', (socket) => {
-	// 	console.log('Hola mundo');
-	// 	console.log(socket);
-	// });
-
-	socket.on('message', function(msg){
-	console.log(msg);
-	// socket.emit('message', msg);
-	
-	});
-	
-	socket.on('add-message', (message) => {
-	
-	io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});
-	
-	});
-	
-	socket.on('disconnect', function(){
-	
-	io.emit('users-changed', {user: socket.nickname, event: 'left'});
-	
-	console.log('User Disconnected');
-	
-	});
-});
-
-server.listen(PORT, () => {
+let server = app.listen(PORT, () => {
 	console.log('Servidor conectado ' + PORT);
 });
 
+let io = socketio(server);
+let sockets = {};
+
+io.on('connection', (socket) => {
+
+	let userId = socket.request._query.userId;
+	if(userId) sockets[userId] = socket;
+	
+	console.log('User Connected => ' + userId + ' Socket ID => ' + socket.id);
+
+	socket.on('new-message', function(msg){
+		chatUtils.saveMessage(msg);
+		let userSocket = sockets[msg.toId];
+		if(!userSocket) return;
+		userSocket.emit('add-message', msg);
+	});
+
+	socket.on('write-message', function(data){
+		let userSocket = sockets[data.toId];
+		if(!userSocket) return;
+
+		userSocket.emit('typing-message');
+	});
+	
+	socket.on('disconnect', function(){		
+		Object.keys(sockets).forEach((userId) => {
+			let s = sockets[userId];
+			if(s && s.id == socket.id){
+				sockets[userId] = null;
+				console.log('User Disconnected => '+ s.id);
+			}
+		});
+	});
+});
 
 
-const client = require('./realtime/client');
+
+// const client = require('./realtime/client');

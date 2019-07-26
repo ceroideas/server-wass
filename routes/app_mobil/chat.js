@@ -13,7 +13,7 @@ router.post('/conversations/messages', ChatController.getConversation);
 router.post('/conversations/new', ChatController.newConversation);
 
 // Send reply in conversation
-router.post('/conversations/messages/:conversationId', ChatController.sendReply);
+router.post('/conversations/messages/new', ChatController.sendReply);
 
 
 module.exports = router;

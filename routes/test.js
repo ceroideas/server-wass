@@ -4,7 +4,7 @@ const router = express.Router();
 const socket = require('../realtime/client');
 
 router.route('/').get((req, res) =>{
-    socket.emit('home');
+    socket.emit('example');
     res.send("Hola mundo");
 });
 
