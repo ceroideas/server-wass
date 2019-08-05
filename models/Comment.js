@@ -12,7 +12,8 @@ const CommentSchema = new Schema({
   },
 
   status: {
-    type: String
+    type: String,
+    default: 'hidden'
   },
 
   createdOn: {

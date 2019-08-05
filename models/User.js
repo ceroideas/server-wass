@@ -25,6 +25,10 @@ const UserSchema = new Schema({
   avatar: {
     type: String
   },
+  status: {
+    type: String,
+    default: 'enabled', // disabled
+  },
   createdOn: {
     type: Date,
     default: Date.now

@@ -19,6 +19,10 @@ const BlogSchema = new Schema({
         type: String,
         default: ''
     },
+    status: {
+        type: String,
+        default: 'publish'
+    },
     images: {
         type: [Schema.Types.Mixed]
     },

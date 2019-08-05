@@ -26,11 +26,36 @@ module.exports = {
     },
 
     update: (req, res) => {
-        res.status(201).json({success: true, message: 'blog update'});
+        Blog.findById(req.params.blogId, function(err, blog){
+
+            if (err){
+                res.json({ success: false});
+            }
+            blog.title = req.body.title;
+            blog.shortDescription = req.body.shortDescription;
+            blog.description = req.body.description;
+            blog.status = req.body.status;
+            blog.author = req.body.author;
+
+            blog.save((error, blog) => {
+
+                if(error){
+                    res.status(500).send({success: false, error});
+                } else {
+                    res.status(201).json({success: true, blog});
+                }
+            });
+        })
     },
 
     findOne: (req, res) => {
-        res.status(201).json({success: true, message: 'blog findOne'});
+        Blog.findById(req.params.blogId, function(err, blog){
+
+            if (err){
+                res.json({ success: false});
+            }
+            res.json({ success: true, blog});
+        })
     },
 
     delete: (req, res) => {

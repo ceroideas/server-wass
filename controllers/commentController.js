@@ -5,7 +5,12 @@ module.exports = {
     create: (req, res) => {
         let newComment = new Comment({
             comment: req.body.comment,
-            location: {latitude: req.body.latitude, longitude: req.body.longitude},
+            location: {
+                name: req.body.name,
+                vicinity: req.body.vicinity,
+                latitude: req.body.latitude, 
+                longitude: req.body.longitude
+            },
             status: req.body.status
         });
 
@@ -29,12 +34,47 @@ module.exports = {
         });
     },
 
+    findLast: function(req, res){
+        const getComments = Comment.find().limit(parseInt(req.params.limit)).sort({_id: -1}).exec();
+        
+        getComments.then((comments) => {
+            res.status(201).json({success: true, comments});
+        }).catch((error) => {
+            res.status(500).send({success: false, error});
+        });
+    },
+
     update: (req, res) => {
-        res.status(201).json({success: true, message: 'comment update'});
+        Comment.findById(req.params.commentId, function(err, comment){
+
+            if (err){
+                res.json({ success: false});
+            }
+            comment.comment = req.body.comment;
+            comment.location.name =  req.body.name;
+            comment.location.vicinity =  req.body.vicinity;
+            comment.location.latitude =  req.body.latitude;
+            comment.location.longitude =  req.body.longitude;
+            comment.status = req.body.status;
+
+            comment.save((error, comment) => {
+
+                if(error){
+                    res.status(500).send({success: false, error});
+                } else {
+                    res.status(201).json({success: true, comment});
+                }
+            });
+        })
     },
 
     findOne: (req, res) => {
-        res.status(201).json({success: true, message: 'comment findOne'});
+        Comment.findById(req.params.commentId, function (err, comment) {
+            if (err){
+                res.json({ success: false});
+            }
+            res.json({ success: true, comment});
+        });
     },
 
     delete: (req, res) => {

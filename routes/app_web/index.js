@@ -18,6 +18,8 @@ router.route('/users/:userId')
     .get(UserController.findOne)
     .delete(UserController.delete);
 
+router.route('/users/lasts/:limit')
+    .get(UserController.findLast);
 
 /*
 * @@ Areas
@@ -44,6 +46,8 @@ router.route('/comments/:commentId')
     .get(CommentController.findOne)
     .delete(CommentController.delete);
 
+router.route('/comments/lasts/:limit')
+    .get(CommentController.findLast);
 /*
 * @@ Blogs
 */
