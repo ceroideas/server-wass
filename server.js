@@ -21,6 +21,7 @@ const testRoutes = require('./routes/test');
 const registerRoutes = require('./routes/app_mobil/register');
 const loginRoutes = require('./routes/app_mobil/login');
 const chatRoutes = require('./routes/app_mobil/chat');
+const userRoutes = require('./routes/app_mobil/user');
 
 /*
 * @ Routes web
@@ -47,6 +48,7 @@ app.use(testRoutes);
 app.use(registerRoutes);
 app.use(loginRoutes);
 app.use(chatRoutes);
+app.use(userRoutes);
 
 app.use(webRouters);
 

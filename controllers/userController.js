@@ -69,5 +69,57 @@ module.exports = {
 
     delete: (req, res) => {
         res.status(201).json({success: true, message: 'user delete'});
-    }
+    },
+
+    profileUpdate: (req, res)=> {
+        User.findById(req.body.userId, function (err, user) {
+            if (err){
+                res.json({ success: false});
+            }
+            user.firstName = req.body.firstName;
+            user.nationality = req.body.nationality;
+            user.save((error, user) => {
+
+                if(error){
+                    res.status(500).send({success: false, error});
+                } else {
+                    res.status(201).json({success: true, user});
+                }
+            });
+        });
+    },
+    
+    profilePasswordUpdate: (req, res)=> {
+        User.findById(req.body.userId, function (err, user) {
+            if (err){
+                res.json({ success: false});
+            }
+            user.password = req.body.password;
+            user.save((error, user) => {
+
+                if(error){
+                    res.status(500).send({success: false, error});
+                } else {
+                    res.status(201).json({success: true});
+                }
+            });
+        });
+    },
+    
+    lastAccessApp: (req, res)=> {
+        User.findById(req.body.userId, function (err, user) {
+            if (err){
+                res.json({ success: false});
+            }
+            user.lastAccessOn = new Date();
+            user.save((error, user) => {
+
+                if(error){
+                    res.status(500).send({success: false, error});
+                } else {
+                    res.status(201).json({success: true});
+                }
+            });
+        });
+    },
 }

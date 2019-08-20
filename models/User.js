@@ -36,6 +36,10 @@ const UserSchema = new Schema({
   updatedOn: {
     type: Date,
     default: Date.now
+  },
+  lastAccessOn: {
+    type: Date,
+    default: Date.now
   }
 });
 
