@@ -5,11 +5,10 @@ module.exports = {
     create: (req, res) => {
         let newComment = new Comment({
             comment: req.body.comment,
+            userId: req.body.userId,
+            communityId: req.body.communityId,
             location: {
-                name: req.body.name,
-                vicinity: req.body.vicinity,
-                latitude: req.body.latitude, 
-                longitude: req.body.longitude
+                name: req.body.communityName,
             },
             status: req.body.status
         });
