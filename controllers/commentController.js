@@ -5,6 +5,7 @@ module.exports = {
     create: (req, res) => {
         let newComment = new Comment({
             comment: req.body.comment,
+            rate: req.body.rate,
             userId: req.body.userId,
             communityId: req.body.communityId,
             location: {

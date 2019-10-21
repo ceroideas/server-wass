@@ -11,12 +11,6 @@ const CommunitySchema = new Schema({
     locations:{
         type: [Schema.Types.Mixed]
     },
-    comments:{
-        type: [Schema.Types.Mixed]
-    },
-    visits:{
-        type: [Schema.Types.Mixed]
-    },
     createdOn: {
         type: Date,
         default: Date.now

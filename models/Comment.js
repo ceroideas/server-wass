@@ -16,6 +16,9 @@ const CommentSchema = new Schema({
   comment: {
     type: String
   },
+  rate: {
+    type: Number
+  },
 
   location: {
     type: Object
