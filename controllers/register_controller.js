@@ -13,8 +13,7 @@ module.exports = {
     signup: function(req, res){
         let avatar = req.body.image;
         if(avatar){
-            cloudinary.uploader.upload(
-                "data:image/*;charset=utf-8;base64," + avatar, 
+            cloudinary.uploader.upload(avatar, 
                 { tags: "basic_sample", 
                 folder: 'profiles',
                 use_filename: true}, 
