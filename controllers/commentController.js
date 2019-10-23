@@ -44,6 +44,20 @@ module.exports = {
         });
     },
 
+    findLastCommunity: function(req, res){
+        const getComments = Comment.find({'communityId': req.params.communityId}).limit(parseInt(req.params.limit)).sort({_id: -1})
+        .populate({
+            path: 'userId',
+            select: ['firstName', 'avatar'],
+        }).exec();
+        
+        getComments.then((comments) => {
+            res.status(201).json({success: true, comments});
+        }).catch((error) => {
+            res.status(500).send({success: false, error});
+        });
+    },
+
     update: (req, res) => {
         Comment.findById(req.params.commentId, function(err, comment){
 

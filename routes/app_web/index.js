@@ -48,6 +48,9 @@ router.route('/comments/:commentId')
 
 router.route('/comments/lasts/:limit')
     .get(CommentController.findLast);
+
+router.route('/comments/lasts/community/:limit/:communityId')
+    .get(CommentController.findLastCommunity);
 /*
 * @@ Blogs
 */
