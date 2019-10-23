@@ -3,6 +3,7 @@ let UserController = require('../../controllers/userController');
 let BlogController = require('../../controllers/blogController');
 let AreaController = require('../../controllers/areaController');
 let CommentController = require('../../controllers/commentController');
+let PlaceController = require('../../controllers/placeController');
 
 const router = express.Router();
 
@@ -63,5 +64,18 @@ router.route('/blogs/:blogId')
     .get(BlogController.findOne)
     .delete(BlogController.delete);
 
+/*
+* @@ Places
+*/
+router.route('/places')
+    .post(PlaceController.create)
+    .get(PlaceController.findAll);
+router.route('/places/updata')
+    .get(PlaceController.uploadData)
+
+// router.route('/blogs/:blogId')
+//     .put(BlogController.update)
+//     .get(BlogController.findOne)
+//  
 
 module.exports = router;
