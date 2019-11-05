@@ -1,4 +1,12 @@
 const User = require('../models/User');
+const cloudinary = require('cloudinary').v2;
+const cloudinaryConfig = require('../config/cloudinary');
+
+cloudinary.config({
+	cloud_name: cloudinaryConfig.cloud_name, 
+  	api_key: cloudinaryConfig.api_key, 
+  	api_secret: cloudinaryConfig.api_secret
+});
 
 module.exports = {
 
@@ -76,6 +84,23 @@ module.exports = {
             if (err){
                 res.json({ success: false});
             }
+
+            let image = req.body.image;
+
+            if(image){
+                cloudinary.uploader.upload(image, 
+                    { tags: "basic_sample", 
+                    folder: 'profiles',
+                    use_filename: true}, 
+                    function (err, image) {
+                    if (err) { console.warn(err); } else {
+                        user.avatar = image.url
+
+                        user.save();
+                    }
+                });
+            }
+
             user.firstName = req.body.firstName;
             user.nationality = req.body.nationality;
             user.save((error, user) => {
