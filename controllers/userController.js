@@ -84,7 +84,8 @@ module.exports = {
             if (err){
                 res.json({ success: false});
             }
-
+            console.log('profileUpdate');
+            console.log(req.body);
             let image = req.body.image;
 
             if(image){
