@@ -3,6 +3,7 @@ let UserController = require('../../controllers/userController');
 
 let router = express.Router();
 
+router.route('/profile').post(UserController.profile);
 router.route('/profile/update').post(UserController.profileUpdate);
 router.route('/profile/password/update').post(UserController.profilePasswordUpdate);
 router.route('/profile/last-access-app').post(UserController.lastAccessApp);
