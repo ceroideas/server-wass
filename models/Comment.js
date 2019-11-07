@@ -26,7 +26,11 @@ const CommentSchema = new Schema({
 
   status: {
     type: String,
-    default: 'hidden'
+    default: 'publish'
+  },
+  
+  reports:{
+    type: [Schema.Types.Mixed]
   },
 
   createdOn: {

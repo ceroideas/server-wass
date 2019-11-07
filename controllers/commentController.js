@@ -45,7 +45,7 @@ module.exports = {
     },
 
     findLastCommunity: function(req, res){
-        const getComments = Comment.find({'communityId': req.params.communityId}).limit(parseInt(req.params.limit)).sort({_id: -1})
+        const getComments = Comment.find({'communityId': req.params.communityId, 'status': 'publish'}).limit(parseInt(req.params.limit)).sort({_id: -1})
         .populate({
             path: 'userId',
             select: ['firstName', 'avatar'],
@@ -99,4 +99,23 @@ module.exports = {
             res.json({ success: true});
         });
     },
+
+    setReports: (req, res) => {
+        Comment.findById(req.body.commentId, function (err, comment) {
+            if (err){
+                res.json({ success: false});
+            }
+
+            comment.reports.push({
+                userId: req.body.commentId,
+                date: new Date()
+            });
+
+            comment.save((error, user) => {
+                if(!error){
+                    res.status(201).json({success: true});
+                } 
+            });
+        });
+    }
 }
