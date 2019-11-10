@@ -12,11 +12,10 @@ module.exports = {
 
     create: (req, res) => {
         let reqBlog = req.body;
-        let image = req.body.image;
+        let reqImage = req.body.image;
 
-        if(image.value){
-            cloudinary.uploader.upload(
-                "data:"+image.filetype+";base64,"+image.value, 
+        if(reqImage){
+            cloudinary.uploader.upload(reqImage, 
                 { tags: "basic_sample", 
                 folder: 'blogs',
                 use_filename: true}, 
@@ -76,7 +75,7 @@ module.exports = {
     },
 
     update: (req, res) => {
-        let image = req.body.image;
+        let reqImage = req.body.image;
 
         Blog.findById(req.params.blogId, function(err, blog){
 
@@ -84,9 +83,8 @@ module.exports = {
                 res.json({ success: false});
             }
 
-            if(image.value){
-                cloudinary.uploader.upload(
-                    "data:"+image.filetype+";base64,"+image.value, 
+            if(reqImage){
+                cloudinary.uploader.upload(reqImage,
                     { tags: "basic_sample", 
                     folder: 'blogs',
                     use_filename: true}, 
