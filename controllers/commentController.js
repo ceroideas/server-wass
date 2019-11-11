@@ -25,7 +25,11 @@ module.exports = {
     },
 
     findAll: (req, res) => {
-        const getComments = Comment.find().sort({_id: -1}).exec();
+        const getComments = Comment.find().sort({_id: -1})
+        .populate({
+            path: 'userId',
+            select: ['firstName', 'avatar'],
+        }).exec();
         
         getComments.then((comments) => {
             res.status(201).json({success: true, comments});
@@ -35,7 +39,11 @@ module.exports = {
     },
 
     findLast: function(req, res){
-        const getComments = Comment.find().limit(parseInt(req.params.limit)).sort({_id: -1}).exec();
+        const getComments = Comment.find().limit(parseInt(req.params.limit)).sort({_id: -1})
+        .populate({
+            path: 'userId',
+            select: ['firstName', 'avatar'],
+        }).exec();
         
         getComments.then((comments) => {
             res.status(201).json({success: true, comments});
