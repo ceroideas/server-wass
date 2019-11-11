@@ -19,6 +19,10 @@ const PlaceSchema = new Schema({
         type: String,
         default: ''
     },
+    status: {
+        type: String,
+        default: 'publish'
+    },
     position:{
         type: Object
     },

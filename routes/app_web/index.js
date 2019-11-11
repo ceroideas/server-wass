@@ -76,9 +76,10 @@ router.route('/places')
 router.route('/places/updata')
     .get(PlaceController.uploadData)
 
-// router.route('/blogs/:blogId')
-//     .put(BlogController.update)
-//     .get(BlogController.findOne)
-//  
+router.route('/places/:placeId')
+    .put(PlaceController.update)
+    .get(PlaceController.findOne)
+    .delete(PlaceController.delete);
+ 
 
 module.exports = router;

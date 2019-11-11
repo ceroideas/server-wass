@@ -24,9 +24,8 @@ module.exports = {
         let reqPlace = req.body;
         let image = req.body.image;
 
-        if(image.value){
-            cloudinary.uploader.upload(
-                "data:"+image.filetype+";base64,"+image.value, 
+        if(image){
+            cloudinary.uploader.upload(image, 
                 { tags: "basic_sample", 
                 folder: 'places',
                 use_filename: true}, 
@@ -37,9 +36,11 @@ module.exports = {
                         shortDescription: reqPlace.shortDescription,
                         description: reqPlace.description,
                         author: reqPlace.author,
+                        status: reqPlace.status,
                         position: {
-                            lat: reqPlace.position.lat,
-                            lng: reqPlace.position.lng,
+                            address: reqPlace.address,
+                            lat: reqPlace.latitude,
+                            lng: reqPlace.longitude,
                         },
                         images: {
                             img: image.url
@@ -64,8 +65,9 @@ module.exports = {
                 author: reqPlace.author,
                 status: reqPlace.status,
                 position: {
-                    lat: reqPlace.position.lat,
-                    lng: reqPlace.position.lng,
+                    address: reqPlace.address,
+                    lat: reqPlace.latitude,
+                    lng: reqPlace.longitude,
                 },
                 images: {
                 }
@@ -92,66 +94,70 @@ module.exports = {
         });
     },
 
-    // update: (req, res) => {
-    //     let image = req.body.image;
+    update: (req, res) => {
+        let image = req.body.image;
 
-    //     Blog.findById(req.params.blogId, function(err, blog){
+        Place.findById(req.params.placeId, function(err, place){
 
-    //         if (err){
-    //             res.json({ success: false});
-    //         }
+            if (err){
+                res.json({ success: false});
+            }
 
-    //         if(image.value){
-    //             cloudinary.uploader.upload(
-    //                 "data:"+image.filetype+";base64,"+image.value, 
-    //                 { tags: "basic_sample", 
-    //                 folder: 'blogs',
-    //                 use_filename: true}, 
-    //                 function (err, image) {
-    //                 if (err) { console.warn(err); } else {
-    //                     blog.images = {
-    //                         img: image.url
-    //                     }
+            if(image){
+                cloudinary.uploader.upload(image, 
+                    { tags: "basic_sample", 
+                    folder: 'places',
+                    use_filename: true}, 
+                    function (err, image) {
+                    if (err) { console.warn(err); } else {
+                        place.images = {
+                            img: image.url
+                        }
 
-    //                     blog.save();
-    //                 }
-    //             });
-    //         }
+                        place.save();
+                    }
+                });
+            }
 
-    //         blog.title = req.body.title;
-    //         blog.shortDescription = req.body.shortDescription;
-    //         blog.description = req.body.description;
-    //         blog.status = req.body.status;
-    //         blog.author = req.body.author;
+            place.title = req.body.title;
+            place.shortDescription = req.body.shortDescription;
+            place.description = req.body.description;
+            place.status = req.body.status;
+            place.author = req.body.author;
+            place.position = {
+                address: req.body.address,
+                lat: req.body.latitude,
+                lng: req.body.longitude,
+            },
 
             
-    //         blog.save((error, blog) => {
+            place.save((error, place) => {
 
-    //             if(error){
-    //                 res.status(500).send({success: false, error});
-    //             } else {
-    //                 res.status(201).json({success: true, blog});
-    //             }
-    //         });
-    //     })
-    // },
+                if(error){
+                    res.status(500).send({success: false, error});
+                } else {
+                    res.status(201).json({success: true, place});
+                }
+            });
+        })
+    },
 
-    // findOne: (req, res) => {
-    //     Blog.findById(req.params.blogId, function(err, blog){
+    findOne: (req, res) => {
+        Place.findById(req.params.placeId, function(err, place){
 
-    //         if (err){
-    //             res.json({ success: false});
-    //         }
-    //         res.json({ success: true, blog});
-    //     })
-    // },
+            if (err){
+                res.json({ success: false});
+            }
+            res.json({ success: true, place});
+        })
+    },
 
-    // delete: (req, res) => {
-    //     Blog.findByIdAndRemove(req.params.blogId, function (err, blog) {
-    //         if (err){
-    //             res.json({ success: false});
-    //         }
-    //         res.json({ success: true});
-    //     });
-    // },
+    delete: (req, res) => {
+        Place.findByIdAndRemove(req.params.placeId, function (err, place) {
+            if (err){
+                res.json({ success: false});
+            }
+            res.json({ success: true});
+        });
+    },
 }
