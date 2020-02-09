@@ -5,7 +5,7 @@ const socket = require('../realtime/client');
 
 router.route('/').get((req, res) =>{
     socket.emit('example');
-    res.send("Hola mundo");
+    res.send("Hola mundo!");
 });
 
 module.exports = router;
