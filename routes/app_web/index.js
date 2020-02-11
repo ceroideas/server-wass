@@ -91,7 +91,7 @@ router.route('/communities')
 router.route('/communities/upload-data')
     .get(CommunityController.uploadData)
 
-router.route('/communities/:userId')
+router.route('/communities/:communityId')
     .put(CommunityController.update)
     .get(CommunityController.findOne)
     .delete(CommunityController.delete);
