@@ -89,10 +89,10 @@ router.route('/communities')
     .post(CommunityController.create)
     .get(CommunityController.findAll);
 router.route('/communities/upload-data')
-    .get(PlaceController.uploadData)
+    .get(CommunityController.uploadData)
 
 router.route('/communities/:userId')
-    // .put(CommunityController.update)
+    .put(CommunityController.update)
     .get(CommunityController.findOne)
     .delete(CommunityController.delete);
  
