@@ -4,6 +4,7 @@ let BlogController = require('../../controllers/blogController');
 let AreaController = require('../../controllers/areaController');
 let CommentController = require('../../controllers/commentController');
 let PlaceController = require('../../controllers/placeController');
+let CommunityController = require('../../controllers/communityController');
 
 const router = express.Router();
 
@@ -80,6 +81,20 @@ router.route('/places/:placeId')
     .put(PlaceController.update)
     .get(PlaceController.findOne)
     .delete(PlaceController.delete);
+
+/*
+* @@ communities
+*/
+router.route('/communities')
+    .post(CommunityController.create)
+    .get(CommunityController.findAll);
+router.route('/communities/upload-data')
+    .get(PlaceController.uploadData)
+
+router.route('/communities/:userId')
+    .put(CommunityController.update)
+    .get(CommunityController.findOne)
+    .delete(CommunityController.delete);
  
 
 module.exports = router;
