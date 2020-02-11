@@ -41,7 +41,7 @@ module.exports = {
             }
             community.street =  req.body.street;
             community.color = req.body.color;
-            community.location = req.body.polygons;
+            community.locations = req.body.locations;
 
             community.save((error, community) => {
 
