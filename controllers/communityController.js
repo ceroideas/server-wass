@@ -33,26 +33,26 @@ module.exports = {
         });
     },
 
-    update: (req, res) => {
-        Community.findById(req.params.communityId, function(err, community){
+    // update: (req, res) => {
+    //     Community.findById(req.params.communityId, function(err, community){
 
-            if (err){
-                res.json({ success: false});
-            }
-            community.street =  req.body.street;
-            community.color = req.body.color;
-            community.location = req.body.polygons;
+    //         if (err){
+    //             res.json({ success: false});
+    //         }
+    //         community.street =  req.body.street;
+    //         community.color = req.body.color;
+    //         community.location = req.body.polygons;
 
-            community.save((error, community) => {
+    //         community.save((error, community) => {
 
-                if(error){
-                    res.status(500).send({success: false, error});
-                } else {
-                    res.status(201).json({success: true, community});
-                }
-            });
-        })
-    },
+    //             if(error){
+    //                 res.status(500).send({success: false, error});
+    //             } else {
+    //                 res.status(201).json({success: true, community});
+    //             }
+    //         });
+    //     })
+    // },
 
     findAll: (req, res) => {
         const getCommunities = Community.find().sort({_id: -1}).exec();
