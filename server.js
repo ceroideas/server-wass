@@ -22,7 +22,7 @@ const registerRoutes = require('./routes/app_mobil/register');
 const loginRoutes = require('./routes/app_mobil/login');
 const chatRoutes = require('./routes/app_mobil/chat');
 const userRoutes = require('./routes/app_mobil/user');
-const communityRoutes = require('./routes/app_mobil/community');
+// const communityRoutes = require('./routes/app_mobil/community');
 
 /*
 * @ Routes web
@@ -50,7 +50,7 @@ app.use(registerRoutes);
 app.use(loginRoutes);
 app.use(chatRoutes);
 app.use(userRoutes);
-app.use(communityRoutes);
+// app.use(communityRoutes);
 
 app.use(webRouters);
 
