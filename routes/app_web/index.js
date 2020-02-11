@@ -92,7 +92,7 @@ router.route('/communities/upload-data')
     .get(PlaceController.uploadData)
 
 router.route('/communities/:userId')
-    .put(CommunityController.update)
+    // .put(CommunityController.update)
     .get(CommunityController.findOne)
     .delete(CommunityController.delete);
  
