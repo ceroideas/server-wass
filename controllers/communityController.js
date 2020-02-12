@@ -54,7 +54,12 @@ module.exports = {
         })
     },
     delete: (req, res)=> {
-
+        Community.findByIdAndRemove(req.params.communityId, function (err, community) {
+            if (err){
+                res.json({ success: false});
+            }
+            res.json({ success: true});
+        });
     },
 
     findAll: (req, res) => {
