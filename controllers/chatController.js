@@ -68,21 +68,21 @@ module.exports = {
     // },
 
     getConversation: (req, res, next) => {
-        // Message.find({ conversationId: req.params.conversationId })
-        // // .select('createdAt body author')
-        // // // .sort('-createdAt')
-        // // .populate({
-        // // path: 'author',
-        // // select: 'firstName'
-        // // })
-        // .exec(function(err, messages) {
-        // if (err) {
-        //     res.send({ error: err });
-        //     return next(err);
-        // }
+        Message.find({ conversationId: req.params.conversationId })
+        // .select('createdAt body author')
+        // // .sort('-createdAt')
+        // .populate({
+        // path: 'author',
+        // select: 'firstName'
+        // })
+        .exec(function(err, messages) {
+        if (err) {
+            res.send({ error: err });
+            return next(err);
+        }
 
-        // res.status(200).json({ messages });
-        // });
+        res.status(200).json({ messages });
+        });
     },
 
     // newConversation: (req, res, next) => {
@@ -133,21 +133,21 @@ module.exports = {
         // author: req.body._id
         // });
 
-        const reply = new Message({
-            conversationId: newConversation._id,
-            author: req.body.author,
-            time: req.body.time,
-            body: req.body.body
-        });
+        // const reply = new Message({
+        //     conversationId: newConversation._id,
+        //     author: req.body.author,
+        //     time: req.body.time,
+        //     body: req.body.body
+        // });
     
-        reply.save(function(err, sentReply) {
-        if (err) {
-            res.send({ error: err });
-            return next(err);
-        }
+        // reply.save(function(err, sentReply) {
+        // if (err) {
+        //     res.send({ error: err });
+        //     return next(err);
+        // }
     
-        res.status(200).json({ message: 'Reply successfully sent!' });
-        return(next);
-        });
+        // res.status(200).json({ message: 'Reply successfully sent!' });
+        // return(next);
+        // });
     }
 }
