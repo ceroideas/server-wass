@@ -68,21 +68,21 @@ module.exports = {
     // },
 
     getConversations: (req, res, next) => {
-        // Message.find({ conversationId: req.params.conversationId })
-        // // .select('createdAt body author')
-        // // // .sort('-createdAt')
-        // // .populate({
-        // // path: 'author',
-        // // select: 'firstName'
-        // // })
-        // .exec(function(err, messages) {
-        // if (err) {
-        //     res.send({ error: err });
-        //     return next(err);
-        // }
+        Message.find({ conversationId: req.params.conversationId })
+        // .select('createdAt body author')
+        // // .sort('-createdAt')
+        // .populate({
+        // path: 'author',
+        // select: 'firstName'
+        // })
+        .exec(function(err, messages) {
+        if (err) {
+            res.send({ error: err });
+            return next(err);
+        }
 
-        // res.status(200).json({ messages });
-        // });
+        res.status(200).json({ messages });
+        });
     },
 
     // newConversation: (req, res, next) => {
