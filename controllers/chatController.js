@@ -67,7 +67,7 @@ module.exports = {
     //     });
     // },
 
-    getConversation: (req, res, next) => {
+    getConversations: (req, res, next) => {
         // Message.find({ conversationId: req.params.conversationId })
         // // .select('createdAt body author')
         // // // .sort('-createdAt')
