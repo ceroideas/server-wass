@@ -5,7 +5,7 @@ let router = express.Router();
 
 
 // View messages to and from authenticated user
-router.post('/conversations/:groupId', ChatController.getConversations);
+router.get('/conversations/:groupId', ChatController.getConversations);
 
 // router.post('/conversations/messages', ChatController.getConversation);
 
