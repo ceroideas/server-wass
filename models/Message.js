@@ -3,10 +3,15 @@ const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({  
     conversationId: {
-      type: Schema.Types.ObjectId,
+      type: String,
+      // type: Schema.Types.ObjectId,
       required: true
     },
     body: {
+      type: String,
+      required: true
+    },
+    time: {
       type: String,
       required: true
     },
