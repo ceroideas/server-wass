@@ -133,6 +133,8 @@ module.exports = {
         // author: req.body._id
         // });
 
+        console.log(req);
+
         const reply = new Message({
             conversationId: newConversation._id,
             author: req.body.author,
@@ -140,14 +142,14 @@ module.exports = {
             body: req.body.body
         });
     
-        reply.save(function(err, sentReply) {
-        if (err) {
-            res.send({ error: err });
-            return next(err);
-        }
+        // reply.save(function(err, sentReply) {
+        // if (err) {
+        //     res.send({ error: err });
+        //     return next(err);
+        // }
     
-        res.status(200).json({ message: 'Reply successfully sent!' });
-        return(next);
-        });
+        // res.status(200).json({ message: 'Reply successfully sent!' });
+        // return(next);
+        // });
     }
 }
