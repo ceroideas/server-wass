@@ -135,12 +135,12 @@ module.exports = {
 
         console.log(req);
 
-        const reply = new Message({
-            conversationId: newConversation._id,
-            author: req.body.author,
-            time: req.body.time,
-            body: req.body.body
-        });
+        // const reply = new Message({
+        //     conversationId: newConversation._id,
+        //     author: req.body.author,
+        //     time: req.body.time,
+        //     body: req.body.body
+        // });
     
         // reply.save(function(err, sentReply) {
         // if (err) {
