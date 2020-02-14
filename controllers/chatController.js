@@ -133,7 +133,7 @@ module.exports = {
         // author: req.body._id
         // });
 
-        return req;
+        // return req;
 
         // const reply = new Message({
         //     conversationId: newConversation._id,
@@ -148,8 +148,8 @@ module.exports = {
         //     return next(err);
         // }
     
-        // res.status(200).json({ message: 'Reply successfully sent!' });
-        // return(next);
+        res.status(200).json({ message: 'Reply successfully sent!' });
+        return(req);
         // });
     }
 }
