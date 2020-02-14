@@ -69,7 +69,7 @@ module.exports = {
 
     getConversations: (req, res, next) => {
         Message.find({ conversationId: req.params.groupId })
-        .sort('createdAt')
+        // .sort('createdAt')
         .limit(10)
         // .select('createdAt body author')
         // .populate({
