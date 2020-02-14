@@ -134,10 +134,10 @@ module.exports = {
         // });
 
         const reply = new Message({
-            conversationId: req.conversationId,
-            author: req.author,
+            conversationId: req.body.conversationId,
+            author: req.body.author,
             // time: req.body.time,
-            body: req.body
+            body: req.body.body
         });
     
         reply.save(function(err, sentReply) {
