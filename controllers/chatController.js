@@ -136,7 +136,7 @@ module.exports = {
         });
     },
 
-    deleteAll: function(){
+    deleteAll: function(req, res){
         Message.remove({}, function(err) {
             if (err) {
                 console.log(err)
