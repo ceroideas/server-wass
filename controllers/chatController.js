@@ -137,7 +137,7 @@ module.exports = {
     },
 
     deleteAll: function(){
-        const getMessages = Message.remove();
+        Message.deleteMany({});
     },
 
     sendReply: (req, res, next) => {
