@@ -137,7 +137,13 @@ module.exports = {
     },
 
     deleteAll: function(){
-        Message.deleteMany({});
+        Message.remove({}, function(err) {
+            if (err) {
+                console.log(err)
+            } else {
+                res.end('success');
+            }
+        });
     },
 
     sendReply: (req, res, next) => {
