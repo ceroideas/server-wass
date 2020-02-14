@@ -133,7 +133,7 @@ module.exports = {
         // author: req.body._id
         // });
 
-        console.log(req);
+        return req;
 
         // const reply = new Message({
         //     conversationId: newConversation._id,
