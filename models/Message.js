@@ -11,10 +11,10 @@ const MessageSchema = new Schema({
       type: String,
       required: true
     },
-    // time: {
-    //   type: String,
-    //   required: true
-    // },
+    time: {
+      type: String,
+      required: true
+    },
     author: {
       type: Schema.Types.ObjectId,
       ref: 'User'

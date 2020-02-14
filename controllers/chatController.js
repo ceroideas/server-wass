@@ -156,7 +156,7 @@ module.exports = {
         const reply = new Message({
             conversationId: req.body.conversationId,
             author: req.body.author,
-            // time: req.body.time,
+            time: req.body.time,
             body: req.body.body
         });
     
