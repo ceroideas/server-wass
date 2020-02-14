@@ -148,7 +148,7 @@ module.exports = {
         //     return next(err);
         // }
     
-        res.status(200).json({ message: 'Reply successfully sent!' });
+        res.status(200).json({ message: 'Reply successfully sent!'+req });
         return(req);
         // });
     }
