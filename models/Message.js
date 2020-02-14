@@ -16,7 +16,7 @@ const MessageSchema = new Schema({
       type: String,
       required: true
     },
-    author: [authorSchema]/*{
+    author: authorSchema/*{
       type: Schema.Types.ObjectId,
       required: true
     }*/
