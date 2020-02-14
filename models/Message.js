@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const authorSchema = new Schema({_id: String,firstName:String, avatar:String})
 const Schema = mongoose.Schema;
+const authorSchema = new Schema({_id: String,firstName:String, avatar:String})
 
 const MessageSchema = new Schema({  
     conversationId: {
