@@ -126,6 +126,16 @@ module.exports = {
     //     });
     // },
 
+    findAll: function(req, res){
+        const getMessages = Message.find().sort({_id: -1}).exec();
+        
+        getMessages.then((messages) => {
+            res.status(201).json({success: true, messages});
+        }).catch((error) => {
+            res.status(500).send({success: false, error});
+        });
+    },
+
     sendReply: (req, res, next) => {
         // const reply = new Message({
         // conversationId: req.body.conversationId,
