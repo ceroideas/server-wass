@@ -13,6 +13,7 @@ router.get('/conversations/:groupId', ChatController.getConversations);
 // Start new conversation
 // router.post('/conversations/new', ChatController.newConversation);
 router.post('/conversations/new', ChatController.sendReply);
+router.get('/delConversations', ChatController.deleteAll);
 
 // Send reply in conversation
 // router.post('/conversations/messages/new', ChatController.sendReply);
