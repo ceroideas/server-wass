@@ -136,6 +136,10 @@ module.exports = {
         });
     },
 
+    deleteAll: function(){
+        const getMessages = Message.remove();
+    },
+
     sendReply: (req, res, next) => {
         // const reply = new Message({
         // conversationId: req.body.conversationId,
